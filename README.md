@@ -21,13 +21,18 @@ To run the Health Track AI app on your local machine, follow these steps:
    https://github.com/Sadickachuli/Health-Track_AI.git
    cd Health-Track_AI
    ```
-2. **Install dependencies:**
+
+2. ## Contributors
+- [Aristide Isingizwe](https://github.com/aristideI/)
+-  [Mohamed Ahmed Yasin](https://github.com/Mohamedayasin/)
+-  [Sadick Mustapha Achuli](https://github.com/sadickachuli/)
+4. **Install dependencies:**
 
 ```sh
           flutter packages get
 ```
 
-3. **Run the app:**
+4. **Run the app:**
 
 ```sh
           flutter run
