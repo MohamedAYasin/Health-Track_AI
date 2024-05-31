@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(HealthTrackAIApp());
+  runApp(const HealthTrackAIApp());
 }
 
 class HealthTrackAIApp extends StatelessWidget {
+  const HealthTrackAIApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -12,25 +14,24 @@ class HealthTrackAIApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomeScreen(),
+      home: const HomeScreen(),
     );
   }
 }
 
-
-
-
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
-  static List<Widget> _widgetOptions = <Widget>[
+  static final List<Widget> _widgetOptions = <Widget>[
     SymptomTrackingScreen(),
     DiagnosisScreen(),
-    TreatmentScreen(),
+    const TreatmentScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -43,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Health-Track AI'),
+        title: const Text('Health-Track AI'),
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
@@ -67,17 +68,18 @@ class _HomeScreenState extends State<HomeScreen> {
         selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // I just added the button for later use. It is just there for no reason now!
-        },
-        child: Icon(Icons.add),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     // I just added the button for later use. It is just there for no reason now!
+      //   },
+      //   child: const Icon(Icons.add),
+      // ),
     );
   }
 }
 
 class SymptomTrackingScreen extends StatelessWidget {
+  SymptomTrackingScreen({super.key});
   // For the mean time this will be the list of symptoms haha
   final List<String> symptoms = [
     'Headache',
@@ -93,7 +95,7 @@ class SymptomTrackingScreen extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
+          const Text(
             'Track your symptoms here:',
             style: TextStyle(fontSize: 24),
           ),
@@ -103,7 +105,7 @@ class SymptomTrackingScreen extends StatelessWidget {
               onPressed: () {
                 // We will later Implement functionality to allow users to add symptoms
               },
-              child: Text('Add Symptom'),
+              child: const Text('Add Symptom'),
             ),
           ),
           Expanded(
@@ -111,7 +113,7 @@ class SymptomTrackingScreen extends StatelessWidget {
               itemCount: symptoms.length, // Use the actual symptom list length
               itemBuilder: (context, index) {
                 return ListTile(
-                  leading: Icon(Icons.report_problem),
+                  leading: const Icon(Icons.report_problem),
                   title: Text(symptoms[index]), // Display actual symptoms
                 );
               },
@@ -124,6 +126,7 @@ class SymptomTrackingScreen extends StatelessWidget {
 }
 
 class DiagnosisScreen extends StatelessWidget {
+  DiagnosisScreen({super.key});
   // Placeholder for diagnosis data
   final List<String> diagnoses = [
     'Diagnosis 1',
@@ -148,7 +151,7 @@ class DiagnosisScreen extends StatelessWidget {
           child: Center(
             child: Text(
               diagnoses[index], // Display actual diagnosis
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
           ),
         );
@@ -158,8 +161,10 @@ class DiagnosisScreen extends StatelessWidget {
 }
 
 class TreatmentScreen extends StatelessWidget {
+  const TreatmentScreen({super.key});
   // Placeholder for treatment suggestions
-  final String treatmentPlanUrl = 'https://blog.ipleaders.in/wp-content/uploads/2020/01/Health-Insurance-696x696.jpg';
+  final String treatmentPlanUrl =
+      'https://blog.ipleaders.in/wp-content/uploads/2020/01/Health-Insurance-696x696.jpg';
 
   @override
   Widget build(BuildContext context) {
@@ -167,12 +172,12 @@ class TreatmentScreen extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
+          const Text(
             'Treatment Suggestions',
             style: TextStyle(fontSize: 24),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
             child: Align(
               alignment: Alignment.center,
               child: Chip(
@@ -196,7 +201,7 @@ class TreatmentScreen extends StatelessWidget {
                 // Handle treatment suggestion
                 // Implement functionality to provide a treatment plan
               },
-              child: Text('Get Treatment Plan'),
+              child: const Text('Get Treatment Plan'),
             ),
           ),
         ],
