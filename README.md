@@ -1,8 +1,9 @@
-# health_track_ai
-
 # Health Track AI
 
 Health Track AI is a Flutter/Dart-based mobile application that utilizes artificial intelligence to monitor and improve users' health and fitness. The app tracks various health metrics, provides personalized recommendations, and helps users maintain a healthy lifestyle.
+
+![app-design](https://github.com/Sadickachuli/Health-Track_AI/assets/116743995/a4fad4d3-0d00-49e1-a987-c1f6e9b5b9dc)
+
 
 ## Features
 
