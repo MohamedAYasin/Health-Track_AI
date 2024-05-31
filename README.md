@@ -12,6 +12,11 @@ Health Track AI is a Flutter/Dart-based mobile application that utilizes artific
 
 - **Security**: All your health data is stored securely and is never shared without your consent.
 
+## Contributors
+- [Aristide Isingizwe](https://github.com/aristideI/)
+-  [Mohamed Ahmed Yasin](https://github.com/Mohamedayasin/)
+-  [Sadick Mustapha Achuli](https://github.com/sadickachuli/)
+
 ## Installation
 
 To run the Health Track AI app on your local machine, follow these steps:
@@ -22,17 +27,13 @@ To run the Health Track AI app on your local machine, follow these steps:
    cd Health-Track_AI
    ```
 
-2. ## Contributors
-- [Aristide Isingizwe](https://github.com/aristideI/)
--  [Mohamed Ahmed Yasin](https://github.com/Mohamedayasin/)
--  [Sadick Mustapha Achuli](https://github.com/sadickachuli/)
-4. **Install dependencies:**
+2. **Install dependencies:**
 
 ```sh
           flutter packages get
 ```
 
-4. **Run the app:**
+3. **Run the app:**
 
 ```sh
           flutter run
