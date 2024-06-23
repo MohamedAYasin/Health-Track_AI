@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:health_track_ai/constant/colors.dart';
 import 'package:health_track_ai/pages/chat_bot_page.dart';
 import 'package:health_track_ai/pages/home_page.dart';
 import 'package:health_track_ai/pages/profile_page.dart';
@@ -40,7 +41,7 @@ class _NavigationState extends State<LoggedRouter> {
               borderRadius: BorderRadius.circular(30.0),
               child: GNav(
                 gap: 10,
-                backgroundColor: const Color.fromARGB(255, 34, 96, 255),
+                backgroundColor: CustomColors.mainBlue,
                 color: Colors.white,
                 activeColor: Colors.black,
                 tabBackgroundColor: const Color.fromARGB(100, 255, 255, 255),
