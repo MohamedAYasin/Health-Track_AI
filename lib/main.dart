@@ -19,5 +19,3 @@ class HealthTrackAIApp extends StatelessWidget {
     );
   }
 }
-
-
