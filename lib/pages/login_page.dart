@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'signup_page.dart';
-
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -9,83 +10,125 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Log In'),
+        title: const Text('Log In', style: TextStyle(color: Colors.blue)),
+        backgroundColor: Colors.white,
+        iconTheme: const IconThemeData(color: Colors.blue),
+        elevation: 0,
       ),
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                'Welcome',
-                style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.blue),
-              ),
-              const Text(
-                'Learn ipsum dolor sit amet,',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 14, color: Colors.black54),
-              ),
-              const SizedBox(height: 30),
-              const TextField(
-                decoration: InputDecoration(
-                  labelText: 'Email or Mobile Number',
-                  border: OutlineInputBorder(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Welcome',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.blue),
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+              style: TextStyle(fontSize: 14, color: Colors.black54),
+            ),
+            const SizedBox(height: 32),
+            TextField(
+              decoration: InputDecoration(
+                labelText: 'Email or Mobile Number',
+                hintText: 'example@example.com',
+                filled: true,
+                fillColor: const Color(0xFFECF1FF), // Background color
+                enabledBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.blue),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.blue, width: 2),
+                  borderRadius: BorderRadius.circular(8),
                 ),
               ),
-              const SizedBox(height: 10),
-              const TextField(
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  border: OutlineInputBorder(),
+            ),
+            const SizedBox(height: 16),
+            TextField(
+              decoration: InputDecoration(
+                labelText: 'Password',
+                suffixIcon: const Icon(Icons.visibility_off),
+                filled: true,
+                fillColor: const Color(0xFFECF1FF), // Background color
+                enabledBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.blue),
+                  borderRadius: BorderRadius.circular(8),
                 ),
-                obscureText: true,
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.blue, width: 2),
+                  borderRadius: BorderRadius.circular(8),
+                ),
               ),
-              const SizedBox(height: 10),
-              TextButton(
+              obscureText: true,
+            ),
+            const SizedBox(height: 8),
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
                 onPressed: () {},
-                child: const Text('Forgot Password?', style: TextStyle(color: Colors.blue)),
+                child: const Text('Forget Password?', style: TextStyle(color: Colors.blue)),
               ),
-              const SizedBox(height: 20),
-              ElevatedButton(
+            ),
+            const SizedBox(height: 16),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 15),
                   backgroundColor: Colors.blue,
+                  padding: const EdgeInsets.all(16),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                 ),
-                child: const Text('Log In', style: TextStyle(fontSize: 18)),
+                child: const Text('Log In'),
               ),
-              const SizedBox(height: 20),
-              const Text('or sign in with', style: TextStyle(color: Colors.black54)),
-              const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Icon(Icons.g_mobiledata, size: 40),
-                  SizedBox(width: 20),
-                  Icon(Icons.facebook, size: 40),
-                  SizedBox(width: 20),
-                  Icon(Icons.apple, size: 40),
-                ],
+            ),
+            const SizedBox(height: 16),
+            const Center(child: Text('or sign in with', style: TextStyle(color: Colors.black54))),
+            const SizedBox(height: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  onPressed: () {},
+                  icon: const FaIcon(FontAwesomeIcons.google, color: Colors.blue),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: const FaIcon(FontAwesomeIcons.facebook, color: Colors.blue),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.fingerprint, color: Colors.blue),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Center(
+              child: RichText(
+                text: TextSpan(
+                  text: "Don't have an account? ",
+                  style: const TextStyle(color: Colors.black54),
+                  children: [
+                    TextSpan(
+                      text: 'Sign Up',
+                      style: const TextStyle(color: Colors.blue),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const SignupPage()),
+                          );
+                        },
+                    ),
+                  ],
+                ),
               ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text("Don't have an account?"),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const SignupPage()),
-                      );
-                    },
-                    child: const Text('Sign Up', style: TextStyle(color: Colors.blue)),
-                  ),
-                ],
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

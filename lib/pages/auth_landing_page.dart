@@ -25,10 +25,14 @@ class AuthLandingPage extends StatelessWidget {
                 style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.blue),
               ),
               const Text(
-                'Your Health, Your Control – Track And Thrive',
+                'Your Health, Your Control',
                 style: TextStyle(fontSize: 18, color: Colors.blue),
               ),
-              const SizedBox(height: 20),
+              const Text(
+                'Track And Thrive',
+                style: TextStyle(fontSize: 18, color: Colors.blue),
+              ),
+              const SizedBox(height: 90),
               const Text(
                 'Track and Thrive with Health-Track AI: Empowering You with AI-Powered Symptom Tracking and Personalized Health Insights for a Healthier, Happier Life.',
                 textAlign: TextAlign.center,
@@ -46,7 +50,7 @@ class AuthLandingPage extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 15),
                   backgroundColor: Colors.blue,
                 ),
-                child: const Text('Log In', style: TextStyle(fontSize: 18)),
+                child: const Text('Log In', style: TextStyle(fontSize: 18, color: Colors.white)),
               ),
               const SizedBox(height: 10),
               ElevatedButton(
