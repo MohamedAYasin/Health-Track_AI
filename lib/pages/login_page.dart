@@ -16,7 +16,7 @@ class LoginPage extends StatelessWidget {
         elevation: 0,
       ),
       backgroundColor: Colors.white,
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,6 +51,7 @@ class LoginPage extends StatelessWidget {
             TextField(
               decoration: InputDecoration(
                 labelText: 'Password',
+                hintText: '*****************',
                 suffixIcon: const Icon(Icons.visibility_off),
                 filled: true,
                 fillColor: const Color(0xFFECF1FF), // Background color

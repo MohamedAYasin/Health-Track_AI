@@ -16,7 +16,7 @@ class SignupPage extends StatelessWidget {
         elevation: 0,
       ),
       backgroundColor: Colors.white,
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,6 +41,7 @@ class SignupPage extends StatelessWidget {
             const TextField(
               decoration: InputDecoration(
                 labelText: 'Password',
+                hintText: '*****************',
                 border: OutlineInputBorder(),
                 suffixIcon: Icon(Icons.visibility_off),
                 filled: true,
