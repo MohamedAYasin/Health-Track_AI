@@ -31,7 +31,7 @@ class RecordsPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListView.builder(
-          itemCount: 10,
+          itemCount: 5,
           itemBuilder: (context, index) {
             return RecordCard(
                 record: Record(

@@ -5,7 +5,7 @@ import 'package:health_track_ai/routes/logged_router.dart';
 class MainRouter extends StatelessWidget {
   const MainRouter({super.key});
 
-  final _isAuthenticated = false;
+  final _isAuthenticated = true;
 
   @override
   Widget build(BuildContext context) {
