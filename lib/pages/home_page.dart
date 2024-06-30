@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:health_track_ai/models/record_model.dart';
+import 'package:health_track_ai/widgets/record_card.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -29,9 +31,9 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 10),
-                      Column(
+                      const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
+                        children: [
                           Text(
                             'Hi, welcome back',
                             style: TextStyle(
@@ -53,18 +55,19 @@ class HomePage extends StatelessWidget {
                       ),
                       const Spacer(),
                       Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Colors.white,
                           shape: BoxShape.circle,
                         ),
                         child: IconButton(
-                          icon: const Icon(Icons.notifications, color: Colors.blue),
+                          icon: const Icon(Icons.notifications,
+                              color: Colors.blue),
                           onPressed: () {},
                         ),
                       ),
                       const SizedBox(width: 10),
                       Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Colors.white,
                           shape: BoxShape.circle,
                         ),
@@ -101,7 +104,8 @@ class HomePage extends StatelessWidget {
                             const SizedBox(height: 5),
                             Text(
                               ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'][index],
-                              style: const TextStyle(fontSize: 14, color: Colors.white),
+                              style: const TextStyle(
+                                  fontSize: 14, color: Colors.white),
                             ),
                           ],
                         ),
@@ -112,36 +116,45 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-          Expanded(
-            child: ClipPath(
-              clipper: CustomShapeClipper(),
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Colors.white,
+
+          // Weekly Records title
+          const Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Row(
+              children: [
+                Text(
+                  'Weekly Records',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
+                Spacer(),
+                Text(
+                  'View All',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.blue,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: 5,
+              itemBuilder: (context, index) {
+                return RecordCard(
+                    record: Record(
+                  title: 'Record $index',
+                  description: 'Description of record $index',
+                  amount: index * 10.0,
+                ));
+              },
             ),
           ),
         ],
       ),
     );
-  }
-}
-
-class CustomShapeClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    final Path path = Path();
-    path.moveTo(0, 0);
-    path.lineTo(0, 100);
-    path.quadraticBezierTo(size.width / 2, 0, size.width, 100);
-    path.lineTo(size.width, 0);
-    path.lineTo(0, 0);
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) {
-    return false;
   }
 }
