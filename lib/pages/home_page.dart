@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_track_ai/constant/colors.dart';
 import 'package:health_track_ai/models/record_model.dart';
 import 'package:health_track_ai/widgets/record_card.dart';
 
@@ -9,14 +10,16 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: const Text('My Records',
+            style: TextStyle(fontWeight: FontWeight.bold)),
         elevation: 0,
-        backgroundColor: Colors.transparent,
-        foregroundColor: Colors.blue,
+        backgroundColor: CustomColors.mainBlue,
+        foregroundColor: Colors.white,
       ),
       body: Column(
         children: [
           Container(
-            color: const Color(0xFF1034A6), // Egyptian blue
+            color: CustomColors.mainBlue, // Egyptian blue
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
