@@ -148,11 +148,17 @@ class HomePage extends StatelessWidget {
               itemCount: 5,
               itemBuilder: (context, index) {
                 return RecordCard(
-                    record: Record(
-                  title: 'Record $index',
-                  description: 'Description of record $index',
-                  amount: index * 10.0,
-                ));
+                  record: Record(
+                    title: 'Record $index',
+                    description: 'Description of record $index',
+                    leadingCause: 'Sample Cause',
+                    symptom: 'Sample Symptom',
+                    mood: 'Sample Mood',
+                    started: DateTime.now().toIso8601String(),
+                  ),
+                  onDelete: () {},
+                  onEdit: () {},
+                );
               },
             ),
           ),
