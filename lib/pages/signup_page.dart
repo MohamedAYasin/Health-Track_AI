@@ -4,7 +4,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'login_page.dart';
 
 class SignupPage extends StatelessWidget {
-  const SignupPage({super.key});
+  const SignupPage({super.key, required this.setAuthenticated});
+
+  final Function setAuthenticated;
 
   @override
   Widget build(BuildContext context) {
@@ -138,28 +140,36 @@ class SignupPage extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  setAuthenticated();
+                  Navigator.popUntil(context, (route) => route.isFirst);
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,
                   padding: const EdgeInsets.all(16),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8)),
                 ),
                 child: const Text('Sign Up'),
               ),
             ),
             const SizedBox(height: 16),
-            const Center(child: Text('or sign up with', style: TextStyle(color: Colors.black54))),
+            const Center(
+                child: Text('or sign up with',
+                    style: TextStyle(color: Colors.black54))),
             const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 IconButton(
                   onPressed: () {},
-                  icon: const FaIcon(FontAwesomeIcons.google, color: Colors.blue),
+                  icon:
+                      const FaIcon(FontAwesomeIcons.google, color: Colors.blue),
                 ),
                 IconButton(
                   onPressed: () {},
-                  icon: const FaIcon(FontAwesomeIcons.facebook, color: Colors.blue),
+                  icon: const FaIcon(FontAwesomeIcons.facebook,
+                      color: Colors.blue),
                 ),
                 IconButton(
                   onPressed: () {},
@@ -181,7 +191,10 @@ class SignupPage extends StatelessWidget {
                         ..onTap = () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const LoginPage()),
+                            MaterialPageRoute(
+                                builder: (context) => LoginPage(
+                                      setAuthenticated: setAuthenticated,
+                                    )),
                           );
                         },
                     ),

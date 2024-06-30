@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:health_track_ai/routes/main_router.dart';
+import 'package:health_track_ai/pages/splash_screen.dart';
 
 void main() {
   runApp(const HealthTrackAIApp());
@@ -15,7 +15,7 @@ class HealthTrackAIApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MainRouter(),
+      home: const SplashScreen(),
     );
   }
 }

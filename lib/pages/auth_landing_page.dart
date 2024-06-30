@@ -3,7 +3,9 @@ import 'package:health_track_ai/pages/login_page.dart';
 import 'package:health_track_ai/pages/signup_page.dart';
 
 class AuthLandingPage extends StatelessWidget {
-  const AuthLandingPage({super.key});
+  const AuthLandingPage({super.key, required this.setAuthenticated});
+
+  final Function setAuthenticated;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,10 @@ class AuthLandingPage extends StatelessWidget {
               const SizedBox(height: 20),
               const Text(
                 'Health Track',
-                style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.blue),
+                style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue),
               ),
               const Text(
                 'Your Health, Your Control',
@@ -43,28 +48,38 @@ class AuthLandingPage extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const LoginPage()),
+                    MaterialPageRoute(
+                        builder: (context) => LoginPage(
+                              setAuthenticated: setAuthenticated,
+                            )),
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 15),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 60, vertical: 15),
                   backgroundColor: Colors.blue,
                 ),
-                child: const Text('Log In', style: TextStyle(fontSize: 18, color: Colors.white)),
+                child: const Text('Log In',
+                    style: TextStyle(fontSize: 18, color: Colors.white)),
               ),
               const SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const SignupPage()),
+                    MaterialPageRoute(
+                        builder: (context) => SignupPage(
+                              setAuthenticated: setAuthenticated,
+                            )),
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 15),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 60, vertical: 15),
                   backgroundColor: Colors.blue.shade100,
                 ),
-                child: const Text('Sign Up', style: TextStyle(fontSize: 18, color: Colors.blue)),
+                child: const Text('Sign Up',
+                    style: TextStyle(fontSize: 18, color: Colors.blue)),
               ),
             ],
           ),

@@ -4,7 +4,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'signup_page.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  LoginPage({super.key, required this.setAuthenticated});
+
+  final Function setAuthenticated;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,10 @@ class LoginPage extends StatelessWidget {
           children: [
             const Text(
               'Welcome',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.blue),
+              style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue),
             ),
             const SizedBox(height: 8),
             const Text(
@@ -71,35 +76,45 @@ class LoginPage extends StatelessWidget {
               alignment: Alignment.centerRight,
               child: TextButton(
                 onPressed: () {},
-                child: const Text('Forget Password?', style: TextStyle(color: Colors.blue)),
+                child: const Text('Forget Password?',
+                    style: TextStyle(color: Colors.blue)),
               ),
             ),
             const SizedBox(height: 16),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  setAuthenticated();
+                  // pop until the MainRouter
+                  Navigator.popUntil(context, (route) => route.isFirst);
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,
                   padding: const EdgeInsets.all(16),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8)),
                 ),
                 child: const Text('Log In'),
               ),
             ),
             const SizedBox(height: 16),
-            const Center(child: Text('or sign in with', style: TextStyle(color: Colors.black54))),
+            const Center(
+                child: Text('or sign in with',
+                    style: TextStyle(color: Colors.black54))),
             const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 IconButton(
                   onPressed: () {},
-                  icon: const FaIcon(FontAwesomeIcons.google, color: Colors.blue),
+                  icon:
+                      const FaIcon(FontAwesomeIcons.google, color: Colors.blue),
                 ),
                 IconButton(
                   onPressed: () {},
-                  icon: const FaIcon(FontAwesomeIcons.facebook, color: Colors.blue),
+                  icon: const FaIcon(FontAwesomeIcons.facebook,
+                      color: Colors.blue),
                 ),
                 IconButton(
                   onPressed: () {},
@@ -121,7 +136,10 @@ class LoginPage extends StatelessWidget {
                         ..onTap = () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const SignupPage()),
+                            MaterialPageRoute(
+                                builder: (context) => SignupPage(
+                                      setAuthenticated: setAuthenticated,
+                                    )),
                           );
                         },
                     ),
