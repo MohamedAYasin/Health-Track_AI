@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'edit_profile_page.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+  const ProfilePage({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +48,7 @@ class ProfilePage extends StatelessWidget {
           const SizedBox(height: 35),
           ...List.generate(
             customListTiles.length,
-            (index) {
+                (index) {
               final tile = customListTiles[index];
               return Padding(
                 padding: const EdgeInsets.only(bottom: 5),
@@ -68,6 +69,21 @@ class ProfilePage extends StatelessWidget {
                     ),
                     title: Text(tile.title),
                     trailing: const Icon(Icons.chevron_right),
+                    onTap: () {
+                      // Navigate to corresponding screen based on tile
+                      if (tile.title == 'Profile') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EditProfilePage(),
+                          ),
+                        );
+                      } else if (tile.title == 'Logout') {
+                        // Implement logout functionality
+                      } else {
+                        // Handle other tiles accordingly
+                      }
+                    },
                   ),
                 ),
               );
