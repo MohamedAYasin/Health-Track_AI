@@ -3,14 +3,8 @@ import 'package:health_track_ai/constant/colors.dart';
 import 'package:health_track_ai/models/message_model.dart';
 import 'package:health_track_ai/widgets/chat_bubble.dart';
 import 'package:health_track_ai/widgets/message_bar.dart';
-
-final List<Message> dummyMessages = List.generate(
-  10,
-  (index) => Message(
-    message: 'Message $index Hello World! This is a dummy message.',
-    isSender: index % 2 == 0,
-  ),
-);
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class ChatBotPage extends StatefulWidget {
   const ChatBotPage({super.key});
@@ -20,16 +14,51 @@ class ChatBotPage extends StatefulWidget {
 }
 
 class _ChatBotPageState extends State<ChatBotPage> {
-  final List<Message> messages = List.from(dummyMessages);
+  final List<Message> messages = List.from([]);
   final ScrollController _scrollController = ScrollController();
 
-  void _handleSend(String message) {
+  void _handleSend(String message) async {
     setState(() {
       messages.add(Message(
         message: message,
         isSender: true,
       ));
     });
+
+    // Send the message to the FastAPI server
+    final response = await http.post(
+      Uri.parse('http://127.0.0.1:8000/chat'),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: json.encode({'message': message}),
+    );
+
+    if (response.statusCode == 200) {
+      final responseBody = json.decode(response.body);
+      final botMessage = responseBody['response'];
+
+      setState(() {
+        messages.add(Message(
+          message: botMessage,
+          isSender: false,
+        ));
+      });
+
+      // Scroll to the bottom of the list
+      _scrollController.animateTo(
+        _scrollController.position.minScrollExtent,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
+    } else {
+      setState(() {
+        messages.add(Message(
+          message: "Error: Could not get response from server.",
+          isSender: false,
+        ));
+      });
+    }
   }
 
   @override
