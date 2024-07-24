@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "970290217543",
+    "project_id": "ht-ai-21eea",
+    "storage_bucket": "ht-ai-21eea.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:970290217543:android:97199b8f59286e6d172762",
+        "android_client_info": {
+          "package_name": "com.sadick.health_track_ai"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbwfaeFPnsmCamCQ5eY7vlOIWhaCVmwco"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
