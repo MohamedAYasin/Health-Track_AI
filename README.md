@@ -51,6 +51,8 @@ To run the Health Track AI app on your local machine, follow these steps:
 
 ```sh
 
-©2024 All Rights reserved for Group 23.
           flutter run
 ```
+
+
+©2024 All Rights reserved for Group 23.
