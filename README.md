@@ -9,7 +9,7 @@
 
 ## Introduction
 
-Health Track AI is a cutting-edge mobile application built with Flutter and Dart, designed to harness the power of artificial intelligence to enhance users' health and fitness. By providing insightful and personalized health recommendations, Health Track AI empowers users to maintain a healthy lifestyle. The app ensures seamless and secure user experiences through its integration with Firebase for authentication and backend support. Whether individuals are focused on tracking their health metrics, improving their fitness routines, or simply staying informed about their wellbeing, Health Track AI serves as an essential companion on their health journey.
+Health Track AI is a cutting-edge mobile application built with Flutter and Dart, designed to harness the power of artificial intelligence to enhance users' health and fitness. By providing insightful and personalized health recommendations, Health Track AI empowers users to maintain a healthy lifestyle. The app ensures seamless and secure user experiences through its integration with Firebase for authentication and backend support. Whether individuals are focused on tracking their health metrics, improving their fitness routines, or simply staying informed about their wellbeing, Health Track AI serves as an essential companion on their health journey. To manage the application state effectively, we used Flutter's state management solution known as [MobX](https://pub.dev/packages/mobx)
 
 ## Screenshot of the App
 
