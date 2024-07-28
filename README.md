@@ -55,4 +55,4 @@ To run the Health Track AI app on your local machine, follow these steps:
 ```
 
 
-©2024 All Rights reserved for Group 23.
+**©2024 All Rights reserved for Group 23.**
