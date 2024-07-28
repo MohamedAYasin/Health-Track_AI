@@ -50,13 +50,13 @@ class AuthLandingPage extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => LoginPage(
-                              setAuthenticated: setAuthenticated,
-                            )),
+                          setAuthenticated: setAuthenticated,
+                        )),
                   );
                 },
                 style: ElevatedButton.styleFrom(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 60, vertical: 15),
+                  const EdgeInsets.symmetric(horizontal: 60, vertical: 15),
                   backgroundColor: Colors.blue,
                 ),
                 child: const Text('Log In',
@@ -69,13 +69,13 @@ class AuthLandingPage extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => SignupPage(
-                              setAuthenticated: setAuthenticated,
-                            )),
+                          setAuthenticated: setAuthenticated,
+                        )),
                   );
                 },
                 style: ElevatedButton.styleFrom(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 60, vertical: 15),
+                  const EdgeInsets.symmetric(horizontal: 60, vertical: 15),
                   backgroundColor: Colors.blue.shade100,
                 ),
                 child: const Text('Sign Up',
