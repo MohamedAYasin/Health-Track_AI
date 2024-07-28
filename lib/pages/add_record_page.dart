@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart'; // Import Firestore package
 import 'package:health_track_ai/models/record_model.dart';
 
 class AddRecordPage extends StatefulWidget {
@@ -7,7 +8,7 @@ class AddRecordPage extends StatefulWidget {
   const AddRecordPage({this.record, super.key});
 
   @override
-  _AddRecordPageState createState() => _AddRecordPageState();
+  State<AddRecordPage> createState() => _AddRecordPageState();
 }
 
 class _AddRecordPageState extends State<AddRecordPage> {
@@ -21,6 +22,7 @@ class _AddRecordPageState extends State<AddRecordPage> {
 
   @override
   void initState() {
+    print('Record');
     super.initState();
     if (widget.record != null) {
       _titleController.text = widget.record!.title;
@@ -43,17 +45,31 @@ class _AddRecordPageState extends State<AddRecordPage> {
     super.dispose();
   }
 
-  void _submitForm() {
+  void _submitForm() async {
+    print('Submitting form');
     if (_formKey.currentState!.validate()) {
-      final newRecord = Record(
-        title: _titleController.text,
-        symptom: _symptomController.text,
-        started: _startedController.text,
-        description: _descriptionController.text,
-        leadingCause: _leadingCauseController.text,
-        mood: _moodController.text,
-      );
-      Navigator.pop(context, newRecord);
+      final newRecord = {
+        "title": _titleController.text,
+        "symptom": _symptomController.text,
+        "started": _startedController.text,
+        "description": _descriptionController.text,
+        "leadingCause": _leadingCauseController.text,
+        "mood": _moodController.text,
+      };
+
+      try {
+        print('Adding record');
+        await FirebaseFirestore.instance.collection('records').add(newRecord);
+        print('Record added successfully');
+        Navigator.pop(context);
+      } catch (e) {
+        print('Failed to add record: $e');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to add record: $e')),
+        );
+      }
+    } else {
+      print('Form is not valid');
     }
   }
 
@@ -221,7 +237,8 @@ class _AddRecordPageState extends State<AddRecordPage> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue,
                     padding: const EdgeInsets.all(16),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8)),
                   ),
                   child: const Text('Add Record'),
                 ),
