@@ -8,29 +8,34 @@ import 'package:cloud_firestore/cloud_firestore.dart'; // Firestore
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  Future<String> _fetchUsername() async {
+  Future<Map<String, String>> _fetchUserData() async {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       DocumentSnapshot userDoc = await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
       if (userDoc.exists) {
-        return userDoc['username'] ?? 'User'; // Default to 'User' if username not found
+        var data = userDoc.data() as Map<String, dynamic>;
+        String username = data['username'] ?? 'User';
+        String profileImageUrl = data.containsKey('profileImageUrl') ? data['profileImageUrl'] : 'https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=386&q=80';
+        return {'username': username, 'profileImageUrl': profileImageUrl};
       }
     }
-    return 'User'; // Default username if user not found
+    return {
+      'username': 'User',
+      'profileImageUrl': 'https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=386&q=80'
+    };
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Records',
-            style: TextStyle(fontWeight: FontWeight.bold)),
+        title: const Text('My Records', style: TextStyle(fontWeight: FontWeight.bold)),
         elevation: 0,
         backgroundColor: CustomColors.mainBlue,
         foregroundColor: Colors.white,
       ),
-      body: FutureBuilder<String>(
-        future: _fetchUsername(),
+      body: FutureBuilder<Map<String, String>>(
+        future: _fetchUserData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator()); // Show loading indicator while fetching
@@ -38,7 +43,9 @@ class HomePage extends StatelessWidget {
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}')); // Show error if any
           }
-          String username = snapshot.data ?? 'User';
+          Map<String, String> userData = snapshot.data ?? {'username': 'User', 'profileImageUrl': ''};
+          String username = userData['username']!;
+          String profileImageUrl = userData['profileImageUrl']!;
 
           return Column(
             children: [
@@ -51,11 +58,9 @@ class HomePage extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          const CircleAvatar(
+                          CircleAvatar(
                             radius: 30,
-                            backgroundImage: NetworkImage(
-                              'https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=386&q=80',
-                            ),
+                            backgroundImage: NetworkImage(profileImageUrl),
                           ),
                           const SizedBox(width: 10),
                           Column(
@@ -87,8 +92,7 @@ class HomePage extends StatelessWidget {
                               shape: BoxShape.circle,
                             ),
                             child: IconButton(
-                              icon: const Icon(Icons.notifications,
-                                  color: Colors.blue),
+                              icon: const Icon(Icons.notifications, color: Colors.blue),
                               onPressed: () {},
                             ),
                           ),

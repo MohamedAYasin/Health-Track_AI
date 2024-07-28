@@ -17,9 +17,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseStorage _storage = FirebaseStorage.instance;
   final ImagePicker _picker = ImagePicker();
-  final TextEditingController _phoneController = TextEditingController();
   String? _username;
   String? _email;
+  String? _phoneNumber;
   String? _dob;
   String? _profileImageUrl;
   File? _selectedImage;
@@ -35,12 +35,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
       String uid = _auth.currentUser!.uid;
       DocumentSnapshot userDoc = await _firestore.collection('users').doc(uid).get();
       if (userDoc.exists) {
+        Map<String, dynamic>? data = userDoc.data() as Map<String, dynamic>?;
         setState(() {
-          _username = userDoc['username'];
-          _email = userDoc['email'];
-          _phoneController.text = userDoc['phone'] ?? '';
-          _dob = userDoc['dob'];
-          _profileImageUrl = userDoc['profileImageUrl'];
+          _username = data?['username'];
+          _email = data?['email'];
+          _phoneNumber = data?['phone'];
+          _dob = data?['dob'];
+          _profileImageUrl = data?.containsKey('profileImageUrl') ?? false ? data!['profileImageUrl'] : null;
         });
       }
     } catch (e) {
@@ -53,9 +54,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   Future<void> _updateProfile() async {
     try {
       String uid = _auth.currentUser!.uid;
-      Map<String, dynamic> data = {
-        'phone': _phoneController.text,
-      };
+      Map<String, dynamic> data = {};
       if (_selectedImage != null) {
         String imageUrl = await _uploadProfileImage(_selectedImage!);
         data['profileImageUrl'] = imageUrl;
@@ -163,20 +162,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
               ),
             ),
             const SizedBox(height: 10),
-            Center(
-              child: Text(
-                _username ?? 'Username',
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            _buildFormField('Full Name', Icons.person, _username, false),
-            _buildFormField('Email', Icons.email, _email, false),
-            _buildFormField('Phone', Icons.phone, _phoneController.text, true),
-            _buildFormField('Date of Birth', Icons.calendar_today, _dob ?? 'Not Available', false),
+            _buildInfoRow('Username', _username),
+            _buildInfoRow('Email', _email),
+            _buildInfoRow('Phone Number', _phoneNumber),
+            _buildInfoRow('Date of Birth', _dob),
             const SizedBox(height: 20),
             Center(
               child: SizedBox(
@@ -208,29 +197,21 @@ class _EditProfilePageState extends State<EditProfilePage> {
     );
   }
 
-  Widget _buildFormField(String label, IconData icon, String? value, bool isEditable) {
+  Widget _buildInfoRow(String label, String? value) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
-      child: TextFormField(
-        controller: isEditable ? _phoneController : null,
-        readOnly: !isEditable,
-        decoration: InputDecoration(
-          labelText: label,
-          hintText: 'Enter $label',
-          filled: true,
-          fillColor: const Color(0xFFECF1FF),
-          enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.blue),
-            borderRadius: BorderRadius.circular(15),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            label,
+            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.blue, width: 2),
-            borderRadius: BorderRadius.circular(15),
+          Text(
+            value ?? 'Not Available',
+            style: const TextStyle(color: Colors.grey),
           ),
-          prefixIcon: Icon(icon),
-        ),
-        initialValue: isEditable ? null : value,
-        onChanged: isEditable ? (text) {} : null,
+        ],
       ),
     );
   }
