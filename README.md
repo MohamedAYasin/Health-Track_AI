@@ -24,12 +24,6 @@ Health Track AI is a cutting-edge mobile application built with Flutter and Dart
 
 Health Track AI also integrates `Firebase` for secure authentication and robust backend support, ensuring a seamless and reliable user experience. Whether you're looking to maintain a healthy lifestyle or need to keep track of specific health conditions, Health Track AI is your go-to companion.
 
-## Contributors
-
-- [Aristide Isingizwe](https://github.com/aristideI/)
-- [Mohamed Ahmed Yasin](https://github.com/Mohamedayasin/)
-- [Sadick Mustapha Achuli](https://github.com/sadickachuli/)
-
 ## Installation
 
 To run the Health Track AI app on your local machine, follow these steps:
@@ -55,4 +49,11 @@ To run the Health Track AI app on your local machine, follow these steps:
 ```
 
 
+## Contributors
+
+- [Aristide Isingizwe](https://github.com/aristideI/)
+- [Mohamed Ahmed Yasin](https://github.com/Mohamedayasin/)
+- [Sadick Mustapha Achuli](https://github.com/sadickachuli/)
+
+  
 **©2024 All Rights reserved for Group 23.**
