@@ -14,7 +14,7 @@ class HealthTrackAIApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Health-Track AI',
+      title: 'Health-Track ',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
