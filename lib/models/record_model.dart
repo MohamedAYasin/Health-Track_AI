@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Record {
-  final String cause;
+  final String leadingCause;
   final String description;
   final String mood;
   final String started;
@@ -9,7 +9,7 @@ class Record {
   final String title;
 
   Record({
-    required this.cause,
+    required this.leadingCause,
     required this.description,
     required this.mood,
     required this.started,
@@ -21,7 +21,7 @@ class Record {
     Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
 
     return Record(
-      cause: data['cause'] ?? '',
+      leadingCause: data['leadingCause'] ?? '',
       description: data['description'] ?? '',
       mood: data['mood'] ?? '',
       started: data['started'] ?? '',

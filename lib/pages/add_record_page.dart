@@ -22,14 +22,13 @@ class _AddRecordPageState extends State<AddRecordPage> {
 
   @override
   void initState() {
-    print('Record');
     super.initState();
     if (widget.record != null) {
       _titleController.text = widget.record!.title;
       _symptomController.text = widget.record!.symptom;
       _startedController.text = widget.record!.started;
       _descriptionController.text = widget.record!.description;
-      _leadingCauseController.text = widget.record!.cause;
+      _leadingCauseController.text = widget.record!.leadingCause;
       _moodController.text = widget.record!.mood;
     }
   }
@@ -46,7 +45,6 @@ class _AddRecordPageState extends State<AddRecordPage> {
   }
 
   void _submitForm() async {
-    print('Submitting form');
     if (_formKey.currentState!.validate()) {
       final newRecord = {
         "title": _titleController.text,
@@ -58,12 +56,9 @@ class _AddRecordPageState extends State<AddRecordPage> {
       };
 
       try {
-        print('Adding record');
         await FirebaseFirestore.instance.collection('records').add(newRecord);
-        print('Record added successfully');
         Navigator.pop(context);
       } catch (e) {
-        print('Failed to add record: $e');
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Failed to add record: $e')),
         );

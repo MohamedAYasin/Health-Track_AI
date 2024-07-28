@@ -46,7 +46,7 @@ class RecordCard extends StatelessWidget {
               ),
               const SizedBox(height: 8.0),
               Text(
-                'Cause: ${record.cause}',
+                'Cause: ${record.leadingCause}',
                 style: const TextStyle(fontSize: 16, color: Colors.blueAccent),
               ),
               const SizedBox(height: 4.0),
