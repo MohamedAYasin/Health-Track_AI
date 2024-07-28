@@ -29,7 +29,7 @@ class _AddRecordPageState extends State<AddRecordPage> {
       _symptomController.text = widget.record!.symptom;
       _startedController.text = widget.record!.started;
       _descriptionController.text = widget.record!.description;
-      _leadingCauseController.text = widget.record!.leadingCause;
+      _leadingCauseController.text = widget.record!.cause;
       _moodController.text = widget.record!.mood;
     }
   }

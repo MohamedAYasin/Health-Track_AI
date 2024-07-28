@@ -27,16 +27,54 @@ class RecordCard extends StatelessWidget {
       },
       child: Card(
         margin: const EdgeInsets.symmetric(vertical: 8.0),
+        elevation: 5,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.0),
+        ),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(record.symptom, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              Text(
+                record.title,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue,
+                ),
+              ),
+              const SizedBox(height: 8.0),
+              Text(
+                'Cause: ${record.cause}',
+                style: const TextStyle(fontSize: 16, color: Colors.blueAccent),
+              ),
+              const SizedBox(height: 4.0),
+              Text(
+                'Description: ${record.description}',
+                style: const TextStyle(fontSize: 16),
+              ),
+              const SizedBox(height: 4.0),
+              Text(
+                'Mood: ${record.mood}',
+                style: const TextStyle(fontSize: 16, color: Colors.blueAccent),
+              ),
+              const SizedBox(height: 4.0),
+              Text(
+                'Started: ${record.started}',
+                style: const TextStyle(fontSize: 16, color: Colors.blueAccent),
+              ),
+              const SizedBox(height: 4.0),
+              Text(
+                'Symptom: ${record.symptom}',
+                style: const TextStyle(fontSize: 16),
+              ),
+              const SizedBox(height: 16.0),
               Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   IconButton(
-                    icon: const  Icon(Icons.edit, color: Colors.blue),
+                    icon: const Icon(Icons.edit, color: Colors.blue),
                     onPressed: onEdit,
                   ),
                   IconButton(

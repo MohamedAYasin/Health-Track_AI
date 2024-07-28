@@ -179,7 +179,7 @@ class HomePage extends StatelessWidget {
                       record: Record(
                         title: 'Record $index',
                         description: 'Description of record $index',
-                        leadingCause: 'Sample Cause',
+                        cause: 'Sample Cause',
                         symptom: 'Sample Symptom',
                         mood: 'Sample Mood',
                         started: DateTime.now().toIso8601String(),

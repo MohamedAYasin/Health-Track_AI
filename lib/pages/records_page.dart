@@ -3,6 +3,7 @@ import 'package:health_track_ai/constant/colors.dart';
 import 'package:health_track_ai/pages/add_record_page.dart';
 import 'package:health_track_ai/widgets/record_card.dart';
 import 'package:health_track_ai/models/record_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RecordsPage extends StatefulWidget {
   const RecordsPage({super.key});
@@ -13,6 +14,27 @@ class RecordsPage extends StatefulWidget {
 
 class _RecordsPageState extends State<RecordsPage> {
   final List<Record> _records = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchRecordsFromFirestore();
+  }
+
+  Future<void> _fetchRecordsFromFirestore() async {
+    try {
+      final QuerySnapshot snapshot =
+          await FirebaseFirestore.instance.collection('records').get();
+      final List<Record> loadedRecords =
+          snapshot.docs.map((doc) => Record.fromFirestore(doc)).toList();
+      setState(() {
+        _records.addAll(loadedRecords);
+      });
+    } catch (error) {
+      // Handle errors if any
+      print('Error fetching records: $error');
+    }
+  }
 
   void _addNewRecord(Record record) {
     setState(() {
@@ -36,7 +58,8 @@ class _RecordsPageState extends State<RecordsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Records', style: TextStyle(fontWeight: FontWeight.bold)),
+        title: const Text('My Records',
+            style: TextStyle(fontWeight: FontWeight.bold)),
         backgroundColor: CustomColors.mainBlue,
         foregroundColor: CustomColors.white,
         actions: [
@@ -66,7 +89,8 @@ class _RecordsPageState extends State<RecordsPage> {
                 final updatedRecord = await Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => AddRecordPage(record: _records[index]),
+                    builder: (context) =>
+                        AddRecordPage(record: _records[index]),
                   ),
                 );
                 if (updatedRecord != null) {

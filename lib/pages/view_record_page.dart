@@ -17,13 +17,15 @@ class ViewRecordPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Symptom: ${record.symptom}', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            Text('Symptom: ${record.symptom}',
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             const SizedBox(height: 16),
             Text('Started: ${record.started}'),
             const SizedBox(height: 16),
             Text('Description: ${record.description}'),
             const SizedBox(height: 16),
-            Text('Leading Cause: ${record.leadingCause}'),
+            Text('Leading Cause: ${record.cause}'),
             const SizedBox(height: 16),
             Text('Mood: ${record.mood}'),
           ],
