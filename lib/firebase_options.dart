@@ -63,6 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '970290217543',
     projectId: 'ht-ai-21eea',
     storageBucket: 'ht-ai-21eea.appspot.com',
+    androidClientId: '970290217543-m766ldntv3n0n5aj5iq9jqvcjujbh8g6.apps.googleusercontent.com',
+    iosClientId: '970290217543-gtc37o0d5dbcabgbadk58iovu570uks0.apps.googleusercontent.com',
     iosBundleId: 'com.sadick.healthTrackAi',
   );
 
@@ -72,6 +74,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '970290217543',
     projectId: 'ht-ai-21eea',
     storageBucket: 'ht-ai-21eea.appspot.com',
+    androidClientId: '970290217543-m766ldntv3n0n5aj5iq9jqvcjujbh8g6.apps.googleusercontent.com',
+    iosClientId: '970290217543-gtc37o0d5dbcabgbadk58iovu570uks0.apps.googleusercontent.com',
     iosBundleId: 'com.sadick.healthTrackAi',
   );
 
@@ -83,4 +87,5 @@ class DefaultFirebaseOptions {
     authDomain: 'ht-ai-21eea.firebaseapp.com',
     storageBucket: 'ht-ai-21eea.appspot.com',
   );
+
 }

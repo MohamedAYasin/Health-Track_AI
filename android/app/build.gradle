@@ -1,10 +1,10 @@
 plugins {
     id "com.android.application"
     // START: FlutterFire Configuration
-    id 'com.google.gms.google-services'
     // END: FlutterFire Configuration
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
+    id 'com.google.gms.google-services'
 }
 
 def localProperties = new Properties()
@@ -44,7 +44,16 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        multiDexEnabled true
     }
+
+    dependencies {
+        implementation platform('com.google.firebase:firebase-bom:28.4.0')
+        implementation 'com.google.firebase:firebase-analytics'
+        implementation 'com.google.firebase:firebase-auth'
+        implementation 'com.google.firebase:firebase-firestore'
+    }
+
 
     buildTypes {
         release {
@@ -59,4 +68,5 @@ flutter {
     source '../..'
 }
 
+// Apply the Google services plugin at the bottom
 apply plugin: 'com.google.gms.google-services'

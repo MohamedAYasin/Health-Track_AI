@@ -23,7 +23,7 @@ class _MainRouterState extends State<MainRouter> {
     return _isAuthenticated
         ? const LoggedRouter()
         : AuthRouter(
-            setAuthenticated: _handleAuthState,
-          );
+      setAuthenticated: _handleAuthState,
+    );
   }
 }

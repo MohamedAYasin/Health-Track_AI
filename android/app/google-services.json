@@ -12,7 +12,20 @@
           "package_name": "com.sadick.health_track_ai"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "970290217543-m766ldntv3n0n5aj5iq9jqvcjujbh8g6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sadick.health_track_ai",
+            "certificate_hash": "9e15051ffce1d5d698c7f639a7c1dc7c7e926578"
+          }
+        },
+        {
+          "client_id": "970290217543-d5k0ugml3vp1opfc5kbbscnapbdr5t7e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBbwfaeFPnsmCamCQ5eY7vlOIWhaCVmwco"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "970290217543-d5k0ugml3vp1opfc5kbbscnapbdr5t7e.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "970290217543-gtc37o0d5dbcabgbadk58iovu570uks0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sadick.healthTrackAi"
+              }
+            }
+          ]
         }
       }
     }
