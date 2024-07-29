@@ -4,6 +4,7 @@ import 'package:mockito/mockito.dart';
 import 'package:health_track_ai/models/record_model.dart';
 
 // Create a Mock class for DocumentSnapshot
+// ignore: subtype_of_sealed_class
 class MockDocumentSnapshot extends Mock implements DocumentSnapshot {}
 
 void main() {
