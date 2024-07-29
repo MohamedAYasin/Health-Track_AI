@@ -4,6 +4,7 @@ import 'package:health_track_ai/pages/add_record_page.dart';
 import 'package:health_track_ai/widgets/record_card.dart';
 import 'package:health_track_ai/models/record_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class RecordsPage extends StatefulWidget {
   const RecordsPage({super.key});
@@ -14,6 +15,8 @@ class RecordsPage extends StatefulWidget {
 
 class _RecordsPageState extends State<RecordsPage> {
   final List<Record> _records = [];
+  bool _isLoading = true;
+  String? _errorMessage;
 
   @override
   void initState() {
@@ -23,22 +26,41 @@ class _RecordsPageState extends State<RecordsPage> {
 
   Future<void> _fetchRecordsFromFirestore() async {
     try {
-      final QuerySnapshot snapshot =
-          await FirebaseFirestore.instance.collection('records').get();
-      final List<Record> loadedRecords =
-          snapshot.docs.map((doc) => Record.fromFirestore(doc)).toList();
-      setState(() {
-        _records.addAll(loadedRecords);
-      });
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        final QuerySnapshot snapshot = await FirebaseFirestore.instance
+            .collection('records')
+            .where('userId', isEqualTo: user.uid) // Filter records by user_id
+            .get();
+
+        final List<Record> loadedRecords =
+            snapshot.docs.map((doc) => Record.fromFirestore(doc)).toList();
+
+        setState(() {
+          _records.addAll(loadedRecords);
+          _isLoading = false;
+          if (_records.isEmpty) {
+            _errorMessage = 'No records found for your account.';
+          }
+        });
+      } else {
+        setState(() {
+          _isLoading = false;
+          _errorMessage = 'User not logged in.';
+        });
+      }
     } catch (error) {
-      // Handle errors if any
-      print('Error fetching records: $error');
+      setState(() {
+        _isLoading = false;
+        _errorMessage = 'Error fetching records: $error';
+      });
     }
   }
 
   void _addNewRecord(Record record) {
     setState(() {
       _records.add(record);
+      _errorMessage = null; // Clear error message if new records are added
     });
   }
 
@@ -51,6 +73,9 @@ class _RecordsPageState extends State<RecordsPage> {
   void _deleteRecord(int index) {
     setState(() {
       _records.removeAt(index);
+      if (_records.isEmpty) {
+        _errorMessage = 'No records found for your account.';
+      }
     });
   }
 
@@ -78,32 +103,36 @@ class _RecordsPageState extends State<RecordsPage> {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ListView.builder(
-          itemCount: _records.length,
-          itemBuilder: (context, index) {
-            return RecordCard(
-              record: _records[index],
-              onEdit: () async {
-                final updatedRecord = await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        AddRecordPage(record: _records[index]),
-                  ),
-                );
-                if (updatedRecord != null) {
-                  _editRecord(index, updatedRecord);
-                }
-              },
-              onDelete: () {
-                _deleteRecord(index);
-              },
-            );
-          },
-        ),
-      ),
+      body: _isLoading
+          ? Center(child: CircularProgressIndicator())
+          : Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: _errorMessage != null
+                  ? Center(child: Text(_errorMessage!))
+                  : ListView.builder(
+                      itemCount: _records.length,
+                      itemBuilder: (context, index) {
+                        return RecordCard(
+                          record: _records[index],
+                          onEdit: () async {
+                            final updatedRecord = await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    AddRecordPage(record: _records[index]),
+                              ),
+                            );
+                            if (updatedRecord != null) {
+                              _editRecord(index, updatedRecord);
+                            }
+                          },
+                          onDelete: () {
+                            _deleteRecord(index);
+                          },
+                        );
+                      },
+                    ),
+            ),
     );
   }
 }

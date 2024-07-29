@@ -5,23 +5,78 @@ import 'package:health_track_ai/widgets/record_card.dart';
 import 'package:firebase_auth/firebase_auth.dart'; // Firebase Authentication
 import 'package:cloud_firestore/cloud_firestore.dart'; // Firestore
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final List<Record> _records = [];
+  bool _isLoading = true;
+  String? _errorMessage;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchUserData();
+    _fetchRecordsFromFirestore();
+  }
+
+  Future<void> _fetchRecordsFromFirestore() async {
+    try {
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        final QuerySnapshot snapshot = await FirebaseFirestore.instance
+            .collection('records')
+            .where('userId', isEqualTo: user.uid) // Filter records by user_id
+            .get();
+
+        final List<Record> loadedRecords =
+            snapshot.docs.map((doc) => Record.fromFirestore(doc)).toList();
+
+        setState(() {
+          _records.addAll(loadedRecords);
+          _isLoading = false;
+          if (_records.isEmpty) {
+            _errorMessage = 'No records found for your account.';
+          }
+        });
+      } else {
+        setState(() {
+          _isLoading = false;
+          _errorMessage = 'User not logged in.';
+        });
+      }
+    } catch (error) {
+      setState(() {
+        _isLoading = false;
+        _errorMessage = 'Error fetching records: $error';
+      });
+    }
+  }
 
   Future<Map<String, String>> _fetchUserData() async {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
-      DocumentSnapshot userDoc = await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
+      DocumentSnapshot userDoc = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .get();
       if (userDoc.exists) {
         var data = userDoc.data() as Map<String, dynamic>;
         String username = data['username'] ?? 'User';
-        String profileImageUrl = data.containsKey('profileImageUrl') ? data['profileImageUrl'] : 'https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=386&q=80';
+        String profileImageUrl = data.containsKey('profileImageUrl')
+            ? data['profileImageUrl']
+            : 'https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=386&q=80';
         return {'username': username, 'profileImageUrl': profileImageUrl};
       }
     }
     return {
       'username': 'User',
-      'profileImageUrl': 'https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=386&q=80'
+      'profileImageUrl':
+          'https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=386&q=80'
     };
   }
 
@@ -29,7 +84,8 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Records', style: TextStyle(fontWeight: FontWeight.bold)),
+        title: const Text('My Records',
+            style: TextStyle(fontWeight: FontWeight.bold)),
         elevation: 0,
         backgroundColor: CustomColors.mainBlue,
         foregroundColor: Colors.white,
@@ -38,12 +94,16 @@ class HomePage extends StatelessWidget {
         future: _fetchUserData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator()); // Show loading indicator while fetching
+            return Center(
+                child:
+                    CircularProgressIndicator()); // Show loading indicator while fetching
           }
           if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}')); // Show error if any
+            return Center(
+                child: Text('Error: ${snapshot.error}')); // Show error if any
           }
-          Map<String, String> userData = snapshot.data ?? {'username': 'User', 'profileImageUrl': ''};
+          Map<String, String> userData =
+              snapshot.data ?? {'username': 'User', 'profileImageUrl': ''};
           String username = userData['username']!;
           String profileImageUrl = userData['profileImageUrl']!;
 
@@ -92,7 +152,8 @@ class HomePage extends StatelessWidget {
                               shape: BoxShape.circle,
                             ),
                             child: IconButton(
-                              icon: const Icon(Icons.notifications, color: Colors.blue),
+                              icon: const Icon(Icons.notifications,
+                                  color: Colors.blue),
                               onPressed: () {},
                             ),
                           ),
@@ -103,7 +164,8 @@ class HomePage extends StatelessWidget {
                               shape: BoxShape.circle,
                             ),
                             child: IconButton(
-                              icon: const Icon(Icons.settings, color: Colors.blue),
+                              icon: const Icon(Icons.settings,
+                                  color: Colors.blue),
                               onPressed: () {},
                             ),
                           ),
@@ -172,23 +234,24 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: ListView.builder(
-                  itemCount: 5,
-                  itemBuilder: (context, index) {
-                    return RecordCard(
-                      record: Record(
-                        title: 'Record $index',
-                        description: 'Description of record $index',
-                        leadingCause: 'Sample Cause',
-                        symptom: 'Sample Symptom',
-                        mood: 'Sample Mood',
-                        started: DateTime.now().toIso8601String(),
-                      ),
-                      onDelete: () {},
-                      onEdit: () {},
-                    );
-                  },
-                ),
+                child: _isLoading
+                    ? Center(child: CircularProgressIndicator())
+                    : _errorMessage != null
+                        ? Center(child: Text(_errorMessage!))
+                        : ListView.builder(
+                            itemCount: _records.length,
+                            itemBuilder: (context, index) {
+                              return RecordCard(
+                                record: _records[index],
+                                onDelete: () {
+                                  // Implement delete functionality
+                                },
+                                onEdit: () {
+                                  // Implement edit functionality
+                                },
+                              );
+                            },
+                          ),
               ),
             ],
           );

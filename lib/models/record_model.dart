@@ -7,6 +7,7 @@ class Record {
   final String started;
   final String symptom;
   final String title;
+  final String userId;
 
   Record({
     required this.leadingCause,
@@ -15,6 +16,7 @@ class Record {
     required this.started,
     required this.symptom,
     required this.title,
+    required this.userId,
   });
 
   factory Record.fromFirestore(DocumentSnapshot doc) {
@@ -27,6 +29,7 @@ class Record {
       started: data['started'] ?? '',
       symptom: data['symptom'] ?? '',
       title: data['title'] ?? '',
+      userId: data['userId'] ?? '',
     );
   }
 }

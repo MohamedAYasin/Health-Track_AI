@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart'; // Import Firestore package
+import 'package:firebase_auth/firebase_auth.dart'; // Import Firebase Auth package
 import 'package:health_track_ai/models/record_model.dart';
 
 class AddRecordPage extends StatefulWidget {
@@ -44,8 +45,21 @@ class _AddRecordPageState extends State<AddRecordPage> {
     super.dispose();
   }
 
+  Future<String?> _getUserId() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    return user?.uid;
+  }
+
   void _submitForm() async {
     if (_formKey.currentState!.validate()) {
+      String? userId = await _getUserId();
+      if (userId == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('User not logged in')),
+        );
+        return;
+      }
+
       final newRecord = {
         "title": _titleController.text,
         "symptom": _symptomController.text,
@@ -53,6 +67,7 @@ class _AddRecordPageState extends State<AddRecordPage> {
         "description": _descriptionController.text,
         "leadingCause": _leadingCauseController.text,
         "mood": _moodController.text,
+        "userId": userId, // Add userId to the record
       };
 
       try {
