@@ -27,7 +27,7 @@ class _ChatBotPageState extends State<ChatBotPage> {
 
     // Send the message to the FastAPI server
     final response = await http.post(
-      Uri.parse('http://127.0.0.1:8000/chat'),
+      Uri.parse('https://chat-bot-model.onrender.com/chat'),
       headers: {
         'Content-Type': 'application/json',
       },
