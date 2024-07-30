@@ -59,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             const SizedBox(height: 8),
             const Text(
-              'Lorem ipsum dolor sit amet...',
+              'Welcome back! Log in to your account',
               style: TextStyle(fontSize: 14, color: Colors.black54),
             ),
             const SizedBox(height: 32),
