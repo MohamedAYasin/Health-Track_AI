@@ -112,7 +112,8 @@ class _LoginPageState extends State<LoginPage> {
               alignment: Alignment.centerRight,
               child: TextButton(
                 onPressed: () {},
-                child: const Text('Forget Password?', style: TextStyle(color: Colors.blue)),
+                child: const Text('Forget Password?',
+                    style: TextStyle(color: Colors.blue)),
               ),
             ),
             const SizedBox(height: 16),
@@ -132,7 +133,8 @@ class _LoginPageState extends State<LoginPage> {
             ),
             const SizedBox(height: 16),
             const Center(
-              child: Text('or sign in with', style: TextStyle(color: Colors.black54)),
+              child: Text('or sign in with',
+                  style: TextStyle(color: Colors.black54)),
             ),
             const SizedBox(height: 16),
             Row(
@@ -140,11 +142,13 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 IconButton(
                   onPressed: () {},
-                  icon: const FaIcon(FontAwesomeIcons.google, color: Colors.blue),
+                  icon:
+                      const FaIcon(FontAwesomeIcons.google, color: Colors.blue),
                 ),
                 IconButton(
                   onPressed: () {},
-                  icon: const FaIcon(FontAwesomeIcons.facebook, color: Colors.blue),
+                  icon: const FaIcon(FontAwesomeIcons.facebook,
+                      color: Colors.blue),
                 ),
                 IconButton(
                   onPressed: () {},
