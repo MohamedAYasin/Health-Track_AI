@@ -6,7 +6,7 @@ import 'auth_landing_page.dart';
 import 'edit_profile_page.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({super.key});
 
   Future<Map<String, dynamic>> _fetchUserProfile() async {
     User? user = FirebaseAuth.instance.currentUser;

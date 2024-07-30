@@ -8,7 +8,7 @@ void main() {
   testWidgets('ChatBubble displays sender message correctly',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-      MaterialApp(
+      const MaterialApp(
         home: Scaffold(
           body: ChatBubble(
             message: 'Hello from sender!',
@@ -31,7 +31,7 @@ void main() {
   testWidgets('ChatBubble displays receiver message correctly',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-      MaterialApp(
+      const MaterialApp(
         home: Scaffold(
           body: ChatBubble(
             message: 'Hello from receiver!',

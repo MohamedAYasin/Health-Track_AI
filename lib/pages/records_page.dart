@@ -104,7 +104,7 @@ class _RecordsPageState extends State<RecordsPage> {
         ],
       ),
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : Padding(
               padding: const EdgeInsets.all(8.0),
               child: _errorMessage != null

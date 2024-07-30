@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'signup_page.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({super.key, required this.setAuthenticated});
+  const LoginPage({super.key, required this.setAuthenticated});
 
   final Function setAuthenticated;
 

@@ -55,7 +55,7 @@ class _AddRecordPageState extends State<AddRecordPage> {
       String? userId = await _getUserId();
       if (userId == null) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('User not logged in')),
+          const SnackBar(content: Text('User not logged in')),
         );
         return;
       }

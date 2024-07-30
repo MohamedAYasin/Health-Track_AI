@@ -27,7 +27,7 @@ class GoogleSignInService {
       return await _auth.signInWithCredential(credential);
     } on FirebaseAuthException catch (e) {
       print('FirebaseAuthException: ${e.message}');
-      throw e; // Re-throw the exception for further handling
+      rethrow; // Re-throw the exception for further handling
     } catch (e) {
       print('Error signing in with Google: $e');
       throw Exception('Google Sign-In failed: $e');

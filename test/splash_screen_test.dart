@@ -6,7 +6,7 @@ void main() {
   testWidgets('SplashScreen displays correctly and navigates after delay',
       (WidgetTester tester) async {
     // Build the SplashScreen widget
-    await tester.pumpWidget(MaterialApp(home: SplashScreen()));
+    await tester.pumpWidget(const MaterialApp(home: SplashScreen()));
 
     // Verify the splash screen's widgets
     expect(find.byType(Image), findsOneWidget);

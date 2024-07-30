@@ -195,7 +195,7 @@ class TreatmentScreen extends StatelessWidget {
             ),
           ),
           ConstrainedBox(
-            constraints: BoxConstraints.tight(Size(200, 50)),
+            constraints: BoxConstraints.tight(const Size(200, 50)),
             child: ElevatedButton(
               onPressed: () {
                 // Handle treatment suggestion

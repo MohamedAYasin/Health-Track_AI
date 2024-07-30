@@ -5,8 +5,8 @@ void main() {
   group('Message class', () {
     test('should initialize correctly', () {
       // Arrange
-      final String testMessage = 'Hello, World!';
-      final bool testIsSender = true;
+      const String testMessage = 'Hello, World!';
+      const bool testIsSender = true;
 
       // Act
       final message = Message(message: testMessage, isSender: testIsSender);
@@ -18,8 +18,8 @@ void main() {
 
     test('should have correct properties', () {
       // Arrange
-      final String testMessage = 'Test Message';
-      final bool testIsSender = false;
+      const String testMessage = 'Test Message';
+      const bool testIsSender = false;
 
       // Act
       final message = Message(message: testMessage, isSender: testIsSender);

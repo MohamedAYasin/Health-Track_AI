@@ -7,7 +7,7 @@ import 'package:health_track_ai/widgets/message_bar.dart';
 void main() {
   testWidgets('ChatBotPage renders correctly', (WidgetTester tester) async {
     // Build the ChatBotPage widget
-    await tester.pumpWidget(MaterialApp(home: const ChatBotPage()));
+    await tester.pumpWidget(const MaterialApp(home: ChatBotPage()));
 
     // Check if AppBar is present with the correct title
     expect(find.byType(AppBar), findsOneWidget);

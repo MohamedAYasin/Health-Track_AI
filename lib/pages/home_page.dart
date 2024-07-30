@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage> {
         future: _fetchUserData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
                 child:
                     CircularProgressIndicator()); // Show loading indicator while fetching
           }
@@ -235,7 +235,7 @@ class _HomePageState extends State<HomePage> {
               ),
               Expanded(
                 child: _isLoading
-                    ? Center(child: CircularProgressIndicator())
+                    ? const Center(child: CircularProgressIndicator())
                     : _errorMessage != null
                         ? Center(child: Text(_errorMessage!))
                         : ListView.builder(

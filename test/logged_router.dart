@@ -10,7 +10,7 @@ void main() {
   testWidgets(
       'LoggedRouter should display the correct page based on selected index',
       (WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(home: LoggedRouter()));
+    await tester.pumpWidget(const MaterialApp(home: LoggedRouter()));
 
     // Verify initial screen
     expect(find.byType(HomePage), findsOneWidget);

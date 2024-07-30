@@ -173,8 +173,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 child: ElevatedButton(
                   onPressed: _updateProfile,
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.resolveWith((states) => Colors.blue),
-                    shape: MaterialStateProperty.resolveWith((states) => RoundedRectangleBorder(
+                    backgroundColor: WidgetStateProperty.resolveWith((states) => Colors.blue),
+                    shape: WidgetStateProperty.resolveWith((states) => RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     )),
                   ),
