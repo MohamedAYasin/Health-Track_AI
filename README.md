@@ -6,7 +6,7 @@
   
 - [Authentication and Backend Demo](https://www.youtube.com/watch?v=yuXxs_8pC1c)
 
-- [Download apk file here](http://fastupload.io/ac5b489a5e33a5fe)
+- [Download apk file here](https://drive.google.com/drive/folders/1F5s7dE5NXv-ILufTiFFySbNWIhKDgrwR?usp=sharing)
 
 
 ## Introduction
